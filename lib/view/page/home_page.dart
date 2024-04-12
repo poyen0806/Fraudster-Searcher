@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:pre_assessment/view/widget/fraud_line_id_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,8 +31,8 @@ class _HomePageState extends State<HomePage> {
               navigationBar: CupertinoNavigationBar(
                 middle: (index == 0) ? const Text('Home') : const Text('Settings'),
               ),
-              child: Center(
-                child: (index == 0) ? const Text('Home') : const Text('Settings'),
+              child: const Center(
+                child: FraudLineIdView(),
               ),
             );
           },
