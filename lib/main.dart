@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pre_assessment/firebase_options.dart';
-// import 'package:pre_assessment/view/screen/home_screen.dart';
 import 'package:pre_assessment/view/screen/login_screen.dart';
 import 'package:pre_assessment/view_model/user_view_model.dart';
 import 'package:provider/provider.dart';
