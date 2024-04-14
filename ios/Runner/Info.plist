@@ -45,5 +45,10 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<!-- The plugin "flutter_line_sdk" requires a higher minimum iOS deployment version 
+	than your application is targeting. To build, increase your application's deployment t
+	arget to at least 13.0 as described at https://docs.flutter.dev/deployment/ios -->
+	<key>MinimumOSVersion</key>
+	<string>15.0</string>
 </dict>
 </plist>
