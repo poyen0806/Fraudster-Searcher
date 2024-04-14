@@ -1,8 +1,26 @@
 import 'package:flutter/cupertino.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:pre_assessment/firebase_options.dart';
 import 'package:pre_assessment/view/page/home_page.dart';
+import 'package:pre_assessment/view_model/user_view_model.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
-  runApp(const Main());
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<UserViewModel>(
+          create: (_) => UserViewModel(),
+        ),
+      ],
+      child: const Main(),
+    ),
+  );
 }
 
 class Main extends StatelessWidget {
