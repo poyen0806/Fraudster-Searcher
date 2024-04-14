@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pre_assessment/firebase_options.dart';
-import 'package:pre_assessment/view/page/home_page.dart';
+// import 'package:pre_assessment/view/screen/home_screen.dart';
+import 'package:pre_assessment/view/screen/login_screen.dart';
 import 'package:pre_assessment/view_model/user_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +31,7 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CupertinoApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: LoginScreen(),
     );
   }
 }
