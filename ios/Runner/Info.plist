@@ -50,5 +50,18 @@
 	arget to at least 13.0 as described at https://docs.flutter.dev/deployment/ios -->
 	<key>MinimumOSVersion</key>
 	<string>15.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+  		<dict>
+    		<key>CFBundleTypeRole</key>
+    		<string>Editor</string>
+    		<key>CFBundleURLName</key>
+    		<string></string>
+    		<key>CFBundleURLSchemes</key>
+    		<array>
+      			<string>75656697687-u1e0ab2rl8l2f0v66nhk82pg0388jpmq.apps.googleusercontent.com</string>
+    		</array>
+  		</dict>
+	</array>
 </dict>
 </plist>
