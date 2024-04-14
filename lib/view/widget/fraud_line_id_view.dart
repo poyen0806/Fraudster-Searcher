@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pre_assessment/repo/fraud_line_id_repo.dart';
+import 'package:pre_assessment/view/widget/sign_in_button.dart';
 
 /// A page has a search field to search the fraud line id list,
 /// if the input exists in the fraud line id list, show the warning message,
@@ -45,7 +46,9 @@ class _FraudLineIdViewState extends State<FraudLineIdView> {
             padding: const EdgeInsets.all(16),
             width: 250,
             decoration: BoxDecoration(
-              color: (isFound) ? CupertinoColors.systemRed : CupertinoColors.systemGreen,
+              color: (isFound)
+                  ? CupertinoColors.systemRed
+                  : CupertinoColors.systemGreen,
               borderRadius: BorderRadius.circular(8),
             ),
             child: CupertinoTextField(
@@ -60,7 +63,9 @@ class _FraudLineIdViewState extends State<FraudLineIdView> {
           if (isFound)
             const Text("Warning: This is a fraud line id.")
           else
-            const Text("Safe: This is not a fraud line id.")
+            const Text("Safe: This is not a fraud line id."),
+          const SizedBox(height: 16),
+          const SignInButton(),
         ],
       ),
     );
