@@ -5,12 +5,15 @@ import 'package:pre_assessment/model/user.dart';
 class UserRepo {
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  static Future<User?> getUser(String email) async {
+  static Future<User?> getUser(String email, String password) async {
     try {
       DocumentSnapshot userDoc =
           await _firestore.collection("users").doc(email).get();
       if (userDoc.exists) {
-        return User.fromJson(userDoc.data() as Map<String, dynamic>);
+        var userData = userDoc.data() as Map<String, dynamic>;
+        if(userData["password"] == password) {
+          return User.fromJson(userData);
+        }
       } else {
         return null;
       }
@@ -20,6 +23,7 @@ class UserRepo {
       }
       return null;
     }
+    return null;
   }
 
   static Future<User?> createUser(User user) async {
