@@ -10,7 +10,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  
+
   runApp(
     MultiProvider(
       providers: [
@@ -31,6 +31,15 @@ class Main extends StatelessWidget {
     return const CupertinoApp(
       debugShowCheckedModeBanner: false,
       home: LoginScreen(),
+      theme: CupertinoThemeData(
+        scaffoldBackgroundColor: CupertinoColors.darkBackgroundGray,
+        primaryColor: CupertinoColors.systemOrange,
+        textTheme: CupertinoTextThemeData(
+          textStyle: TextStyle(
+            color: CupertinoColors.white,
+          ),
+        ),
+      ),
     );
   }
 }
