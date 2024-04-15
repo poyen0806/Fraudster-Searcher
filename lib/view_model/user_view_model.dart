@@ -7,6 +7,10 @@ class UserViewModel with ChangeNotifier {
   String? _error;
 
   Future<bool> signUp(String email, String password) async {
+    if (await UserRepo.getUser(email, password) != null) {
+      _error = "User already exists";
+      return false;
+    }
     _user = User(
       email: email,
       password: password,

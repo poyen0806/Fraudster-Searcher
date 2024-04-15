@@ -126,6 +126,38 @@ class LoginScreen extends StatelessWidget {
                               builder: (context) => const ScreenTemplate(),
                             ),
                           );
+                        } else {
+                          if (context.mounted) {
+                            showCupertinoDialog(
+                              context: context,
+                              builder: (context) {
+                                return CupertinoAlertDialog(
+                                  content: Text(
+                                    userVM.error,
+                                    style: const TextStyle(
+                                      color: CupertinoColors.darkBackgroundGray,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  actions: [
+                                    CupertinoDialogAction(
+                                      child: const Text(
+                                        "OK",
+                                        style: TextStyle(
+                                          color: CupertinoColors
+                                              .darkBackgroundGray,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
                         }
                       },
                       child: const Text(
