@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pre_assessment/view/widget/fraud_line_id_view.dart';
+import 'package:pre_assessment/view/widget/setting_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,18 +10,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final view = [
+    const FraudLineIdView(),
+    const SettingView(),
+  ];
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.home),
-            label: 'Home',
+            icon: Icon(CupertinoIcons.search),
+            label: "Search",
           ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.chat_bubble),
-            label: 'Chats',
+            icon: Icon(CupertinoIcons.settings),
+            label: 'Settings',
           ),
         ],
       ),
@@ -28,12 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return CupertinoTabView(
           builder: (BuildContext context) {
             return CupertinoPageScaffold(
-              navigationBar: CupertinoNavigationBar(
-                middle: (index == 0) ? const Text('Home') : const Text('Settings'),
-              ),
-              child: const Center(
-                child: FraudLineIdView(),
-              ),
+              child: view[index],
             );
           },
         );
