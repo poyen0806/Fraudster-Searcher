@@ -1,19 +1,20 @@
 import 'package:flutter/cupertino.dart';
-import 'package:pre_assessment/view/widget/fraud_line_id_view.dart';
-import 'package:pre_assessment/view/widget/setting_view.dart';
+import 'package:pre_assessment/view/screen/widget/fraud_line_id_screen.dart';
+import 'package:pre_assessment/view/screen/widget/setting_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class ScreenTemplate extends StatefulWidget {
+  const ScreenTemplate({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<ScreenTemplate> createState() => _ScreenTemplateState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _ScreenTemplateState extends State<ScreenTemplate> {
   final view = [
-    const FraudLineIdView(),
-    const SettingView(),
+    const FraudLineIdScreen(),
+    const SettingScreen(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(

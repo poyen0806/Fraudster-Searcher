@@ -1,29 +1,41 @@
 import "package:flutter/cupertino.dart";
-import "package:pre_assessment/view/screen_template.dart";
+import "package:pre_assessment/view/screen/login_screen.dart";
 import "package:pre_assessment/view_model/user_view_model.dart";
 import "package:provider/provider.dart";
+import "package:cached_network_image/cached_network_image.dart";
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SettingScreen extends StatelessWidget {
+  const SettingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     TextEditingController email = TextEditingController();
     TextEditingController password = TextEditingController();
-
-    return Consumer<UserViewModel>(builder: (context, userVM, child) {
-      return CupertinoPageScaffold(
+    return Consumer<UserViewModel>(
+      builder: (context, userVM, child) => SafeArea(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(height: 200),
-              const Text(
-                "🄳🄴🄼🄾",
-                style: TextStyle(
-                  color: CupertinoColors.systemOrange,
-                  fontSize: 80,
-                  fontWeight: FontWeight.bold,
+              const SizedBox(
+                height: 64,
+              ),
+              GestureDetector(
+                onTap: () async {
+                  // TODO: Change the user"s photo
+                },
+                child: SizedBox(
+                  width: 108,
+                  height: 108,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(40),
+                    child: userVM.photoUrl != null
+                        ? CachedNetworkImage(
+                            fit: BoxFit.cover,
+                            imageUrl: userVM.photoUrl,
+                          )
+                        : const Icon(CupertinoIcons.person),
+                  ),
                 ),
               ),
               const SizedBox(height: 100),
@@ -50,7 +62,8 @@ class LoginScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       controller: email,
-                      placeholder: "Email",
+                      readOnly: true,
+                      placeholder: userVM.email,
                       textAlign: TextAlign.center,
                       placeholderStyle: const TextStyle(
                         color: CupertinoColors.white,
@@ -87,7 +100,7 @@ class LoginScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       controller: password,
-                      placeholder: "Password",
+                      placeholder: "*" * userVM.password.toString().length,
                       textAlign: TextAlign.center,
                       placeholderStyle: const TextStyle(
                         color: CupertinoColors.white,
@@ -115,27 +128,17 @@ class LoginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: CupertinoButton(
-                      onPressed: () async {
-                        // Sign up with UserViewModel
-                        final result =
-                            await userVM.signUp(email.text, password.text);
-                        if (result && context.mounted) {
-                          Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (context) => const ScreenTemplate(),
-                            ),
-                          );
-                        }
-                      },
                       child: const Text(
-                        "Sign up",
+                        "Update",
                         style: TextStyle(
-                          color: CupertinoColors.systemOrange,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
+                          color: CupertinoColors.systemOrange,
                         ),
                       ),
+                      onPressed: () {
+                        userVM.updateAccount(password.text);
+                      },
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -143,63 +146,30 @@ class LoginScreen extends StatelessWidget {
                     width: 96,
                     height: 48,
                     decoration: BoxDecoration(
-                      color: CupertinoColors.systemOrange,
                       borderRadius: BorderRadius.circular(8),
+                      color: CupertinoColors.systemOrange,
                     ),
                     child: CupertinoButton(
                       child: const Text(
-                        "Sign in",
+                        "Sign out",
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                           color: CupertinoColors.darkBackgroundGray,
                         ),
                       ),
-                      onPressed: () async {
-                        // Sign in with UserViewModel
-                        final result =
-                            await userVM.signIn(email.text, password.text);
-                        if (result && context.mounted) {
-                          Navigator.push(
-                            context,
+                      onPressed: () {
+                        userVM.signOut();
+                        // Push to LoginScreen
+                        if (context.mounted) {
+                          Navigator.of(context, rootNavigator: true)
+                              .pushAndRemoveUntil(
                             CupertinoPageRoute(
-                              builder: (context) => const ScreenTemplate(),
+                              builder: (context) => const LoginScreen(),
                             ),
+                            // Remove all route until arrive the target
+                            (route) => false,
                           );
-                        } else {
-                          email.clear();
-                          password.clear();
-                          if (context.mounted) {
-                            showCupertinoDialog(
-                              context: context,
-                              builder: (context) {
-                                return CupertinoAlertDialog(
-                                  content: Text(
-                                    userVM.error,
-                                    style: const TextStyle(
-                                      color: CupertinoColors.darkBackgroundGray,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                  actions: [
-                                    CupertinoDialogAction(
-                                      child: const Text(
-                                        "OK",
-                                        style: TextStyle(
-                                          color: CupertinoColors
-                                              .darkBackgroundGray,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          }
                         }
                       },
                     ),
@@ -209,7 +179,7 @@ class LoginScreen extends StatelessWidget {
             ],
           ),
         ),
-      );
-    });
+      ),
+    );
   }
 }

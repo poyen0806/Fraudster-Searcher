@@ -4,14 +4,14 @@ import 'package:pre_assessment/repo/fraud_line_id_repo.dart';
 /// A page has a search field to search the fraud line id list,
 /// if the input exists in the fraud line id list, show the warning message,
 /// otherwise, show the safe message.
-class FraudLineIdView extends StatefulWidget {
-  const FraudLineIdView({super.key});
+class FraudLineIdScreen extends StatefulWidget {
+  const FraudLineIdScreen({super.key});
 
   @override
-  State<FraudLineIdView> createState() => _FraudLineIdViewState();
+  State<FraudLineIdScreen> createState() => _FraudLineIdScreenState();
 }
 
-class _FraudLineIdViewState extends State<FraudLineIdView> {
+class _FraudLineIdScreenState extends State<FraudLineIdScreen> {
   // Get the fraud line id list
   Future<List<Map<String, dynamic>>> fraudLineIdList =
       FraudLineIdRepo().getFraudLineIdList();
