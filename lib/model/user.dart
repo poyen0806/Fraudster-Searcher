@@ -3,7 +3,7 @@ class User {
   String email;
   String password;
   String photoUrl;
-  List<String>? messages;
+  List<dynamic>? messages;
 
   User({
     required this.email,

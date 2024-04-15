@@ -37,4 +37,14 @@ class UserRepo {
       return null;
     }
   }
+
+  static Future<void> updateUser(User user) async {
+    try {
+      await _firestore.collection("users").doc(user.email).update(user.toJson());
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error updating user: $e");
+      }
+    }
+  }
 }

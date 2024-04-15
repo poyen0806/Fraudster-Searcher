@@ -47,6 +47,13 @@ class UserViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> updateAccount(String password) async {
+    _user!.password = password;
+    UserRepo.updateUser(_user!);
+    notifyListeners();
+  }
+
+  // Incomplete
   Future<void> updatePhoto(String photoUrl) async {
     _user!.photoUrl = photoUrl;
     notifyListeners();
@@ -59,6 +66,8 @@ class UserViewModel with ChangeNotifier {
 
   get user => _user;
   get error => _error;
+  get email => _user?.email;
+  get password => _user?.password;
   get photoUrl => _user?.photoUrl;
   get messages => _user?.messages;
 }
