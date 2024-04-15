@@ -2,10 +2,14 @@
 class User {
   String email;
   String password;
+  String photoUrl;
+  List<String>? messages;
 
   User({
     required this.email,
     required this.password,
+    required this.photoUrl,
+    this.messages,
   });
 
   // Line Login profile data
@@ -13,6 +17,8 @@ class User {
     return User(
       email: json["email"],
       password: json["password"],
+      photoUrl: json["photo_url"],
+      messages: json["messages"],
     );
   }
 
@@ -21,6 +27,8 @@ class User {
     return {
       "email": email,
       "password": password,
+      "photo_url": photoUrl,
+      "messages": messages,
     };
   }
 }

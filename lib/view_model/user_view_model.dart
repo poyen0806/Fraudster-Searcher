@@ -4,14 +4,13 @@ import 'package:pre_assessment/repo/user_repo.dart';
 
 class UserViewModel with ChangeNotifier {
   User? _user;
-  get user => _user;
   String? _error;
-  get error => _error;
 
   Future<bool> signUp(String email, String password) async {
     _user = User(
       email: email,
       password: password,
+      photoUrl: "https://as1.ftcdn.net/v2/jpg/02/06/74/22/1000_F_206742233_sxv7K1GPkN5VaUcZwRd07gU8fQ63nhTV.jpg",
     );
     if (await UserRepo.createUser(_user!) != null) {
       notifyListeners();
@@ -23,12 +22,9 @@ class UserViewModel with ChangeNotifier {
   }
 
   Future<bool> signIn(String email, String password) async {
-    _user = User(
-      email: email,
-      password: password,
-    );
     try {
-      if (await UserRepo.getUser(_user!.email, _user!.password) != null) {
+      _user = await UserRepo.getUser(email, password);
+      if (_user != null) {
         notifyListeners();
         return true;
       }
@@ -49,4 +45,19 @@ class UserViewModel with ChangeNotifier {
     _user = null;
     notifyListeners();
   }
+
+  Future<void> updatePhoto(String photoUrl) async {
+    _user!.photoUrl = photoUrl;
+    notifyListeners();
+  }
+
+  Future<void> addMessage(String message) async {
+    _user!.messages?.add(message);
+    notifyListeners();
+  }
+
+  get user => _user;
+  get error => _error;
+  get photoUrl => _user?.photoUrl;
+  get messages => _user?.messages;
 }

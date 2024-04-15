@@ -11,7 +11,7 @@ class UserRepo {
           await _firestore.collection("users").doc(email).get();
       if (userDoc.exists) {
         var userData = userDoc.data() as Map<String, dynamic>;
-        if(userData["password"] == password) {
+        if (userData["password"] == password) {
           return User.fromJson(userData);
         }
       } else {
