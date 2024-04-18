@@ -10,4 +10,4 @@ A simple app can search whether the account's id is a fraudster.
 
 ### Splash Animation
 
-[Splash](assets/videos/splash.mp4)
+![Splash](https://youtube.com/shorts/tMOayjJjhhk?feature=share)
