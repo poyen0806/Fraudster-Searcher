@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
-import 'package:pre_assessment/view/screen/fraud_line_id_screen.dart';
-import 'package:pre_assessment/view/screen/setting_screen.dart';
+import "package:flutter/cupertino.dart";
+import "package:pre_assessment/view/screen/fraud_line_id_screen.dart";
+import "package:pre_assessment/view/screen/setting_screen.dart";
 
 class ScreenTemplate extends StatefulWidget {
   const ScreenTemplate({super.key});
@@ -25,8 +25,8 @@ class _ScreenTemplateState extends State<ScreenTemplate> {
             label: "Search",
           ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.settings),
-            label: 'Settings',
+            icon: Icon(CupertinoIcons.profile_circled),
+            label: "Profile",
           ),
         ],
       ),
