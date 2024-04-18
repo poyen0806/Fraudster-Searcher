@@ -1,16 +1,13 @@
-# pre_assessment
+# Fraudster Searcher
 
-A new Flutter project.
+![Logo](assets/images/logo.png)
 
-## Getting Started
+## Description
 
-This project is a starting point for a Flutter application.
+A simple app can search whether the account's id is a fraudster.
 
-A few resources to get you started if this is your first Flutter project:
+## Preview
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Splash Animation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[Splash](assets/videos/splash.mp4)
