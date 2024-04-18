@@ -4,7 +4,7 @@ import 'package:pre_assessment/model/fraud_line_id.dart';
 class FraudLineIdRepo {
   Dio dio = Dio();
 
-  Future<List<Map<String, dynamic>>> getFraudLineIdList() async {
+  Future<List<Map<String, dynamic>>> getFrauds() async {
     // API URL
     String apiUrl =
         "https://od.moi.gov.tw/api/v1/rest/datastore/A01010000C-001277-053";
