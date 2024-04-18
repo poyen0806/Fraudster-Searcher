@@ -15,7 +15,7 @@ class UserViewModel with ChangeNotifier {
       email: email,
       password: password,
       photoUrl: "https://as1.ftcdn.net/v2/jpg/02/06/74/22/1000_F_206742233_sxv7K1GPkN5VaUcZwRd07gU8fQ63nhTV.jpg",
-      messages: [],
+      messages: ["Hello!"],
     );
     if (await UserRepo.createUser(_user!) != null) {
       notifyListeners();
@@ -65,6 +65,7 @@ class UserViewModel with ChangeNotifier {
 
   Future<void> addMessage(String message) async {
     _user!.messages?.add(message);
+    UserRepo.updateUser(_user!);
     notifyListeners();
   }
 
