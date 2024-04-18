@@ -13,7 +13,7 @@ class LoginScreen extends StatelessWidget {
 
     return Consumer<UserViewModel>(builder: (context, userVM, child) {
       return CupertinoPageScaffold(
-        child: Center(
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
