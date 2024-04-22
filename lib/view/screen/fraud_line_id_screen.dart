@@ -6,12 +6,13 @@ import 'package:pre_assessment/enum/fraud.dart';
 import 'package:pre_assessment/enum/mode.dart';
 import 'package:pre_assessment/repo/fraud_line_id_repo.dart';
 import 'package:pre_assessment/view/widget/message_box.dart';
+import 'package:pre_assessment/view/widget/search_field.dart';
 import 'package:pre_assessment/view_model/user_view_model.dart';
 import 'package:provider/provider.dart';
 
-/// A page has a search field to search the fraud line id list,
-/// if the input exists in the fraud line id list, show the warning message,
-/// otherwise, show the safe message.
+/// [FraudLineIdScreen] is a screen for searching the fraud line id list.
+/// If the input exists in the fraud line id list, it shows a warning message.
+/// Otherwise, it shows a safe message.
 class FraudLineIdScreen extends StatefulWidget {
   const FraudLineIdScreen({super.key});
 
@@ -58,14 +59,20 @@ class _FraudLineIdScreenState extends State<FraudLineIdScreen> {
   }
 
   // Search the fraud line id list
-  Future<Fraud> searchFraudLineId(String id) async {
+  void searchFraudLineId(String id, int index) async {
     final frauds = await FraudLineIdRepo().getFrauds();
+    Fraud result = Fraud.no;
     for (Map<String, dynamic> fraud in frauds) {
       if (fraud["帳號"] == id) {
-        return Fraud.yes;
+        result = Fraud.yes;
+        break;
       }
     }
-    return Fraud.no;
+    if (mounted) {
+      setState(() {
+        searchResults[index] = result;
+      });
+    }
   }
 
   @override
@@ -96,11 +103,7 @@ class _FraudLineIdScreenState extends State<FraudLineIdScreen> {
                         String currentMessage = userVM.messages[index ~/ 2];
                         if (searchResults.length <= index ~/ 2) {
                           searchResults.add(Fraud.unknown);
-                          searchFraudLineId(currentMessage).then((result) {
-                            setState(() {
-                              searchResults[index ~/ 2] = result;
-                            });
-                          });
+                          searchFraudLineId(currentMessage, index ~/ 2);
                         }
                         Fraud? isFound = searchResults[index ~/ 2];
                         if (index % 2 == 0) {
@@ -127,47 +130,14 @@ class _FraudLineIdScreenState extends State<FraudLineIdScreen> {
                   thickness: 1,
                 ),
                 // Search field
-                Container(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                  width: double.infinity,
-                  height: 60,
-                  alignment: Alignment.center,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 9,
-                        child: CupertinoTextField(
-                          strutStyle: const StrutStyle(
-                            height: 1.25,
-                          ),
-                          decoration: BoxDecoration(
-                            color: CupertinoColors.systemGrey,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          controller: search,
-                          placeholder: "Enter text",
-                          placeholderStyle: const TextStyle(
-                            color: CupertinoColors.systemGrey5,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: CupertinoButton(
-                          child: const Icon(
-                            CupertinoIcons.search_circle,
-                          ),
-                          onPressed: () {
-                            if (search.text != "") {
-                              userVM.addMessage(search.text);
-                              search.clear();
-                            }
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
+                SearchField(
+                  searchController: search,
+                  onSearch: (text) {
+                    if (text != "") {
+                      userVM.addMessage(text);
+                      search.clear();
+                    }
+                  },
                 ),
               ],
             ),
@@ -177,7 +147,7 @@ class _FraudLineIdScreenState extends State<FraudLineIdScreen> {
                 color: Colors.black.withOpacity(0.7),
                 child: const Center(
                   child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    valueColor: AlwaysStoppedAnimation(Colors.white),
                   ),
                 ),
               ),
