@@ -1,8 +1,12 @@
-/// A model, including user information and methods to convert user information to JSON
+/// A model representing user information with methods to convert to and from JSON.
 class User {
+  // User email
   String email;
+  // User password
   String password;
+  // User photo URL
   String photoUrl;
+  // List of messages
   List<dynamic>? messages;
 
   User({
@@ -12,7 +16,10 @@ class User {
     this.messages,
   });
 
-  // Line Login profile data
+  /// Factory method to create a [User] instance from a JSON map.
+  ///
+  /// [json] is the map containing user information.
+  /// Returns a [User] instance.
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       email: json["email"],
@@ -22,7 +29,9 @@ class User {
     );
   }
 
-  // Convert user information to JSON
+  /// Converts the [User] instance to a JSON map.
+  ///
+  /// Returns a map containing user information.
   Map<String, dynamic> toJson() {
     return {
       "email": email,

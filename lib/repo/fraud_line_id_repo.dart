@@ -1,9 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:pre_assessment/model/fraud_line_id.dart';
 
+/// Repository class responsible for fetching fraud line id data from an API.
 class FraudLineIdRepo {
   Dio dio = Dio();
 
+  /// Fetches fraud line id data from the API.
+  ///
+  /// Returns a list of maps containing fraud line id data.
   Future<List<Map<String, dynamic>>> getFrauds() async {
     // API URL
     String apiUrl =

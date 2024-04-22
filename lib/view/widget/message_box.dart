@@ -2,9 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:pre_assessment/enum/fraud.dart';
 import 'package:pre_assessment/enum/mode.dart';
 
+/// [MessageBox] is a widget that displays a message with an ID.
+/// The appearance and content of the message depend on the [mode] and [isFound] properties.
 class MessageBox extends StatefulWidget {
+  // Mode of the message box (user or admin)
   final Mode mode;
+  // ID to display in the message box
   final String id;
+  // Whether the ID is found in the fraud list. It can have one of the following values:
+  // - Fraud.yes: The ID is found
+  // - Fraud.no: The ID is not found
+  // - Fraud.unknown: The search for the ID is still ongoing
   final Fraud? isFound;
 
   const MessageBox({
@@ -48,6 +56,7 @@ class _MessageBoxState extends State<MessageBox> {
                 TextSpan(
                   text: widget.id,
                   style: TextStyle(
+                    // yes: red, no: green, unknown: orange
                     color: isAdmin
                         ? widget.isFound == Fraud.unknown
                             ? CupertinoColors.systemOrange
